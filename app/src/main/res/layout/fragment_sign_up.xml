@@ -24,7 +24,7 @@
         android:layout_marginTop="8dp"
         android:hint="@string/hint_username"
         app:counterEnabled="true"
-        app:counterMaxLength="4"
+        app:counterMaxLength="16"
         app:helperText="@string/helper_username"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"
@@ -34,7 +34,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:maxLength="32"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,9 +53,11 @@
         app:icon="@drawable/ic_next"
         app:iconGravity="textEnd"
         app:iconPadding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/til_username"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_max="500dp" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -119,9 +123,11 @@
         android:text="@string/sign_up"
         app:icon="@drawable/ic_sign_up"
         app:iconGravity="textEnd"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/til_confirm_password"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_max="500dp" />
 
     <androidx.constraintlayout.widget.Group
