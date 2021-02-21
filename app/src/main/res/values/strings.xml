@@ -1,3 +1,34 @@
 <resources>
-    <string name="application_name">todi</string>
+    <string name="application_name" translatable="false">TODI</string>
+
+    <!-- Menu -->
+    <string name="bottom_navigation_menu_home">Main</string>
+    <string name="bottom_navigation_menu_profile">Profile</string>
+
+    <!-- Hint -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+
+    <!-- Error -->
+    <string name="error_fill_empty_field">Fill empty field</string>
+    <string name="error_username_length">Minimum username length is 4 characters</string>
+    <string name="error_username_already_taken">This username is already taken</string>
+    <string name="error_confirm_password">Passwords not equals</string>
+    <string name="error_password_length">Minimum password length is 8 characters</string>
+
+    <!-- Helper -->
+    <string name="helper_username">Don\'t use your email login as username</string>
+    <string name="helper_password">Minimum password length is 8 characters</string>
+
+    <!-- Content Description -->
+    <string name="cd_application_logo">Application logo</string>
+
+    <!-- Other -->
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="welcome">Welcome!</string>
+    <string name="next">Next</string>
 </resources>
