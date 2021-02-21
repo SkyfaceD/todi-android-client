@@ -91,6 +91,15 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
     }
 
+    private fun showErrorOnNullOrEmptyField(pair: Pair<String?, TextInputLayout>): Boolean {
+        when (pair.first.isNullOrEmpty()) {
+            true -> pair.second.error = getString(R.string.error_fill_empty_field)
+            false -> pair.second.isErrorEnabled = false
+        }
+
+        return pair.second.isErrorEnabled
+    }
+
     private fun FragmentSignUpBinding.setEditTexts() {
         listOf(
             edtUsername to tilUsername,
@@ -132,15 +141,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 }
             }
         }
-    }
-
-    private fun showErrorOnNullOrEmptyField(pair: Pair<String?, TextInputLayout>): Boolean {
-        when (pair.first.isNullOrEmpty()) {
-            true -> pair.second.error = getString(R.string.error_fill_empty_field)
-            false -> pair.second.isErrorEnabled = false
-        }
-
-        return pair.second.isErrorEnabled
     }
 
     @SuppressLint("SwitchIntDef")
