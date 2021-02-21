@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputLayout
+import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignUpBinding
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private val binding by viewBinding(FragmentSignUpBinding::bind)
+    private val viewModel: SignUpViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,6 +26,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         with(binding) {
             setButtons()
             setEditTexts()
+            setupObservers()
         }
     }
 
@@ -48,8 +51,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             //TODO network work
 
             //For test purpose
-            grpUsername.isVisible = false
-            grpPassword.isVisible = true
+            viewModel.toggleGroup()
+            edtPassword.requestFocus()
         }
 
         //TODO update validation
@@ -96,21 +99,13 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 pair.second.isErrorEnabled = false
             }
         }
+    }
 
-//        edtUsername.doAfterTextChanged {
-//            if (!tilUsername.isErrorEnabled) return@doAfterTextChanged
-//            tilUsername.isErrorEnabled = false
-//        }
-//
-//        edtPassword.doAfterTextChanged {
-//            if (!tilPassword.isErrorEnabled) return@doAfterTextChanged
-//            tilPassword.isErrorEnabled = false
-//        }
-//
-//        edtConfirmPassword.doAfterTextChanged {
-//            if (!tilConfirmPassword.isErrorEnabled) return@doAfterTextChanged
-//            tilConfirmPassword.isErrorEnabled = false
-//        }
+    private fun FragmentSignUpBinding.setupObservers() {
+        viewModel.visibleGroup.observe(viewLifecycleOwner) { state ->
+            grpUsername.isVisible = state
+            grpPassword.isVisible = !state
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -124,11 +119,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         findNavController().navigateUp()
                     }
                     grpPassword.isVisible -> {
+                        tilPassword.isErrorEnabled = false
+                        tilConfirmPassword.isErrorEnabled = false
                         tilPassword.clearAnimation()
                         tilConfirmPassword.clearAnimation()
 
-                        grpUsername.isVisible = true
-                        grpPassword.isVisible = false
+                        viewModel.toggleGroup()
                     }
                 }
             }
