@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -30,6 +31,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -40,4 +45,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$v_kotlin"
 
     implementation "com.google.android.material:material:$v_material"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$v_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$v_navigation"
+
+    implementation "com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection:$v_view_binding"
 }
