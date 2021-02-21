@@ -3,4 +3,18 @@
     <style name="SplashScreen">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.ToggleButton.Top" parent="">
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeTopLeft">4dp</item>
+        <item name="cornerSizeTopRight">4dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.ToggleButton.Bottom" parent="">
+        <item name="cornerSizeBottomLeft">4dp</item>
+        <item name="cornerSizeBottomRight">4dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+    </style>
 </resources>
