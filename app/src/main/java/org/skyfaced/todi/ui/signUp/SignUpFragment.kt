@@ -1,6 +1,9 @@
 package org.skyfaced.todi.ui.signUp
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Configuration.*
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -14,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignUpBinding
+import org.skyfaced.todi.utils.extensions.setGuideline
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
@@ -22,7 +26,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         with(binding) {
             setButtons()
             setEditTexts()
@@ -138,5 +141,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
 
         return pair.second.isErrorEnabled
+    }
+
+    @SuppressLint("SwitchIntDef")
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        binding.glDivider.setGuideline(newConfig.orientation)
     }
 }
