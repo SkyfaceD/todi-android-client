@@ -1,3 +1,4 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/SkyfaceD/todi-android-client?style=for-the-badge)
 # Overview
 
 ## What tools/frameworks used?
