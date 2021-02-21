@@ -23,12 +23,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_username"
+        app:counterEnabled="true"
+        app:counterMaxLength="16"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/gl_divider"
         app:layout_constraintWidth_max="500dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -41,6 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="@string/hint_password"
+        app:counterEnabled="true"
+        app:counterMaxLength="32"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"
@@ -48,6 +53,7 @@
         app:layout_constraintWidth_max="500dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
@@ -72,13 +78,14 @@
 
     <TextView
         android:id="@+id/txt_forgot_password"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:gravity="center_horizontal"
         android:padding="4dp"
         android:text="@string/forgot_password"
         android:textColor="@android:color/holo_blue_dark"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gl_end"
         app:layout_constraintStart_toEndOf="@id/gl_start"

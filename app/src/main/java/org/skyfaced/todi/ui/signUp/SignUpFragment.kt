@@ -17,6 +17,8 @@ import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignUpBinding
+import org.skyfaced.todi.utils.MIN_PASSWORD_LENGTH
+import org.skyfaced.todi.utils.MIN_USERNAME_LENGTH
 import org.skyfaced.todi.utils.extensions.setGuideline
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
@@ -45,8 +47,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 return@setOnClickListener
             }
 
-            if (username.length < 4) {
-                tilUsername.error = getString(R.string.error_username_length)
+            if (username.length < MIN_USERNAME_LENGTH) {
+                tilUsername.error = getString(R.string.error_username_length, MIN_USERNAME_LENGTH)
                 tilUsername.startAnimation(shakeAnimation)
                 return@setOnClickListener
             }
@@ -65,8 +67,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             val fields = listOf(password to tilPassword, confirmPassword to tilConfirmPassword)
 
             if (fields.map { showErrorOnNullOrEmptyField(it) }.any { !it }) {
-                if (password!!.length < 8) tilPassword.error =
-                    getString(R.string.error_password_length)
+                if (password!!.length < MIN_PASSWORD_LENGTH) tilPassword.error =
+                    getString(R.string.error_password_length, MIN_PASSWORD_LENGTH)
             }
 
             val list = listOf(tilPassword, tilConfirmPassword)
