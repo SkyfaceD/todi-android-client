@@ -50,4 +50,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$v_navigation"
 
     implementation "com.kirich1409.viewbindingpropertydelegate:vbpd-noreflection:$v_view_binding"
+
+    implementation "org.koin:koin-android:$v_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$v_koin"
 }
