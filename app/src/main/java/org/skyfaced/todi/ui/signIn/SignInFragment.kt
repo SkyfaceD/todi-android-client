@@ -23,14 +23,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            setButtons()
-            setEditTexts()
+            setupButton()
+            setupEditText()
 
-            glDivider.setGuideline(requireActivity().resources.configuration.orientation)
+            configureGuideline()
         }
     }
 
-    private fun FragmentSignInBinding.setButtons() {
+    private fun FragmentSignInBinding.setupButton() {
         val shakeAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
         btnSignIn.setOnClickListener {
@@ -70,7 +70,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         return pair.second.isErrorEnabled
     }
 
-    private fun FragmentSignInBinding.setEditTexts() {
+    private fun FragmentSignInBinding.setupEditText() {
         listOf(
             edtUsername to tilUsername,
             edtPassword to tilPassword,
@@ -80,6 +80,11 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 pair.second.isErrorEnabled = false
             }
         }
+    }
+
+    private fun FragmentSignInBinding.configureGuideline() {
+        val orientation = requireActivity().resources.configuration.orientation
+        glDivider.setGuideline(orientation)
     }
 
     @SuppressLint("SwitchIntDef")

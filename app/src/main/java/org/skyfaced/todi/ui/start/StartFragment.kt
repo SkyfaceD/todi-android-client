@@ -16,21 +16,21 @@ class StartFragment : Fragment(R.layout.fragment_start) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            setButtons()
-            setTextViews()
+            setupButton()
+            setupTextView()
 
-            glDivider.setGuideline(requireActivity().resources.configuration.orientation, landscape = .35f)
+            configureGuideline()
         }
     }
 
-    private fun FragmentStartBinding.setTextViews() {
+    private fun FragmentStartBinding.setupTextView() {
         txtContinueAsGuest.setOnClickListener {
             val direction = StartFragmentDirections.actionStartFragmentToHomeFragment()
             findNavController().navigate(direction)
         }
     }
 
-    private fun FragmentStartBinding.setButtons() {
+    private fun FragmentStartBinding.setupButton() {
         btnSignIn.setOnClickListener {
             val direction = StartFragmentDirections.actionStartFragmentToSignInFragment()
             findNavController().navigate(direction)
@@ -42,8 +42,16 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         }
     }
 
+    private fun FragmentStartBinding.configureGuideline() {
+        val orientation = requireActivity().resources.configuration.orientation
+        glDivider.setGuideline(orientation, landscape = .35f)
+    }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        binding.glDivider.setGuideline(requireActivity().resources.configuration.orientation, landscape = .35f)
+        binding.glDivider.setGuideline(
+            requireActivity().resources.configuration.orientation,
+            landscape = .35f
+        )
     }
 }

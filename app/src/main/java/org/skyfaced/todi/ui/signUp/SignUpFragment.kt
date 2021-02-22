@@ -29,15 +29,15 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            setButtons()
-            setEditTexts()
-            setupObservers()
+            setupButton()
+            setupEditText()
+            setupObserver()
 
-            glDivider.setGuideline(requireActivity().resources.configuration.orientation)
+            configureGuideline()
         }
     }
 
-    private fun FragmentSignUpBinding.setButtons() {
+    private fun FragmentSignUpBinding.setupButton() {
         val shakeAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.shake)
 
         btnNext.setOnClickListener {
@@ -104,7 +104,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         return pair.second.isErrorEnabled
     }
 
-    private fun FragmentSignUpBinding.setEditTexts() {
+    private fun FragmentSignUpBinding.setupEditText() {
         listOf(
             edtUsername to tilUsername,
             edtPassword to tilPassword,
@@ -117,11 +117,16 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
     }
 
-    private fun FragmentSignUpBinding.setupObservers() {
+    private fun FragmentSignUpBinding.setupObserver() {
         viewModel.visibleGroup.observe(viewLifecycleOwner) { state ->
             grpUsername.isVisible = state
             grpPassword.isVisible = !state
         }
+    }
+
+    private fun FragmentSignUpBinding.configureGuideline() {
+        val orientation = requireActivity().resources.configuration.orientation
+        glDivider.setGuideline(orientation)
     }
 
     override fun onAttach(context: Context) {
