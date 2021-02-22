@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Menu -->
+    <string name="bottom_navigation_menu_home">رئيسي</string>
+    <string name="bottom_navigation_menu_profile">حساب تعريفي</string>
+
+    <!-- Hint -->
+    <string name="hint_username">اسم المستخدم</string>
+    <string name="hint_password">كلمة المرور</string>
+    <string name="hint_confirm_password">تأكيد كلمة المرور</string>
+
+    <!-- Helper -->
+    <string name="helper_username">لا تستخدم تسجيل الدخول إلى البريد الإلكتروني الخاص بك كاسم مستخدم</string>
+    <string name="helper_password">الحد الأدنى لطول كلمة المرور هو 8 أحرف ؛</string>
+
+    <!-- Content Description -->
+    <string name="cd_application_logo">شعار التطبيق</string>
+
+    <!-- Other -->
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="sign_up">سجل الان</string>
+    <string name="forgot_password">نسيت رقمك السري؟</string>
+    <string name="continue_as_guest">تواصل كضيف</string>
+    <string name="welcome">أهلا بك!</string>
+    <string name="next">التالي</string>
+</resources>
