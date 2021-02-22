@@ -14,7 +14,7 @@ import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignInBinding
 import org.skyfaced.todi.utils.MIN_PASSWORD_LENGTH
 import org.skyfaced.todi.utils.MIN_USERNAME_LENGTH
-import org.skyfaced.todi.utils.extensions.setGuideline
+import org.skyfaced.todi.utils.extensions.setPercentByOrientation
 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
@@ -84,12 +84,12 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private fun FragmentSignInBinding.configureGuideline() {
         val orientation = requireActivity().resources.configuration.orientation
-        glDivider.setGuideline(orientation)
+        glDivider.setPercentByOrientation(orientation)
     }
 
     @SuppressLint("SwitchIntDef")
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        binding.glDivider.setGuideline(newConfig.orientation)
+        binding.glDivider.setPercentByOrientation(newConfig.orientation)
     }
 }

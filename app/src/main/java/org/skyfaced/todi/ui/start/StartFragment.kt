@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentStartBinding
-import org.skyfaced.todi.utils.extensions.setGuideline
+import org.skyfaced.todi.utils.extensions.setPercentByOrientation
 
 class StartFragment : Fragment(R.layout.fragment_start) {
     private val binding by viewBinding(FragmentStartBinding::bind)
@@ -44,12 +44,12 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
     private fun FragmentStartBinding.configureGuideline() {
         val orientation = requireActivity().resources.configuration.orientation
-        glDivider.setGuideline(orientation, landscape = .35f)
+        glDivider.setPercentByOrientation(orientation, landscape = .35f)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        binding.glDivider.setGuideline(
+        binding.glDivider.setPercentByOrientation(
             requireActivity().resources.configuration.orientation,
             landscape = .35f
         )
