@@ -13,6 +13,7 @@ TODO
 
 1. Create simple todo app
 2. Publish on "Google Play Store"
+2. Publish on "HUAWEI AppGallery"
 
 TODO
 
