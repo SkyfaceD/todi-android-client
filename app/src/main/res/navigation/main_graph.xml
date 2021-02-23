@@ -49,7 +49,7 @@
         app:startDestination="@id/home_fragment">
         <fragment
             android:id="@+id/home_fragment"
-            android:name="org.skyfaced.todi.ui.HomeFragment"
+            android:name="org.skyfaced.todi.ui.home.HomeFragment"
             tools:layout="@layout/fragment_home" />
     </navigation>
 

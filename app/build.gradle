@@ -45,6 +45,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$v_kotlin"
 
     implementation "com.google.android.material:material:$v_material"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$v_refresh_layout"
 
     implementation "androidx.navigation:navigation-fragment-ktx:$v_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$v_navigation"
