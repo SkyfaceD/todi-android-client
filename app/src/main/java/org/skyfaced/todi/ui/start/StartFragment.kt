@@ -31,13 +31,13 @@ class StartFragment : Fragment(R.layout.fragment_start) {
     }
 
     private fun FragmentStartBinding.setupButton() {
-        btnSignIn.setOnClickListener {
-            val direction = StartFragmentDirections.actionStartFragmentToSignInFragment()
+        btnSignUp.setOnClickListener {
+            val direction = StartFragmentDirections.actionStartFragmentToSignUpFragment()
             findNavController().navigate(direction)
         }
 
-        btnSignUp.setOnClickListener {
-            val direction = StartFragmentDirections.actionStartFragmentToSignUpFragment()
+        btnSignIn.setOnClickListener {
+            val direction = StartFragmentDirections.actionStartFragmentToSignInFragment()
             findNavController().navigate(direction)
         }
     }

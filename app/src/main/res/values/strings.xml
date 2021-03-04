@@ -1,6 +1,4 @@
 <resources>
-    <string name="application_name" translatable="false">TODI</string>
-
     <!-- Menu -->
     <string name="bottom_navigation_menu_home">Main</string>
     <string name="bottom_navigation_menu_profile">Profile</string>
@@ -9,6 +7,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_search">Search</string>
 
     <!-- Error -->
     <string name="error_fill_empty_field">Fill empty field</string>
@@ -24,6 +23,7 @@
     <!-- Content Description -->
     <string name="cd_application_logo">Application logo</string>
     <string name="cd_search">Search</string>
+    <string name="cd_settings">Settings</string>
 
     <!-- Other -->
     <string name="sign_in">Sign In</string>
@@ -32,5 +32,5 @@
     <string name="continue_as_guest">Continue as Guest</string>
     <string name="welcome">Welcome!</string>
     <string name="next">Next</string>
-    <string name="hint_search">Search</string>
+    <string name="add_task">Add Task</string>
 </resources>

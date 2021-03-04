@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_min_corner_size">8dp</dimen>
+    <dimen name="app_max_corner_size">32dp</dimen>
+    <dimen name="app_stroke_width">1.5dp</dimen>
+</resources>

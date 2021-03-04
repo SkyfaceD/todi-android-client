@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <style name="SplashScreen" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/splash_screen</item>
@@ -19,5 +18,9 @@
         <item name="cornerSizeBottomRight">4dp</item>
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="cornerSizeTopRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.ExtendedFloatingActionButton">
+        <item name="cornerSize">@dimen/app_min_corner_size</item>
     </style>
 </resources>
