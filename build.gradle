@@ -1,19 +1,18 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$v_gradle"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$v_kotlin"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$v_navigation"
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
