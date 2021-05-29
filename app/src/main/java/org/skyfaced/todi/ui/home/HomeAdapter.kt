@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import org.skyfaced.todi.databinding.ItemHomeBinding
 import org.skyfaced.todi.utils.extensions.randomString
 import org.skyfaced.todi.utils.extensions.toDate
-import kotlin.random.Random.Default.nextInt
-import kotlin.random.Random.Default.nextLong
 
 class HomeAdapter(private val onClick: (dummyData: DummyData) -> Unit) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
@@ -18,98 +16,13 @@ class HomeAdapter(private val onClick: (dummyData: DummyData) -> Unit) :
         val timestamp: Long
     )
 
-    private val dummyList = listOf(
+    private val dummyList = List(20) {
         DummyData(
-            "My Awesome Note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dish",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dinner",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Magazine",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Buy products",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Another note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "My Awesome Note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dish",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dinner",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Magazine",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Buy products",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Another note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "My Awesome Note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dish",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Dinner",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Magazine",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Buy products",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
-        ),
-        DummyData(
-            "Another note",
-            randomString(nextInt(100)),
-            System.currentTimeMillis() - nextLong(1_000_000_000_000)
+            "My Awesome ${randomString(10)}",
+            randomString(100),
+            System.currentTimeMillis()
         )
-    )
+    }
 
     class ViewHolder(private val binding: ItemHomeBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(dummyData: DummyData, onClick: (dummyData: DummyData) -> Unit) {

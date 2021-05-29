@@ -1,5 +1,8 @@
 package org.skyfaced.todi.utils.extensions
 
+import android.content.Context
+import android.util.DisplayMetrics
+import com.skydoves.colorpickerview.ColorEnvelope
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.random.Random
@@ -18,3 +21,16 @@ fun Long.toDate(pattern: String = "EEEE, dd MMMM yyyy hh:mm aaa"): String {
 
     return SimpleDateFormat(pattern, locale).format(date)
 }
+
+fun Float.dpToPx(context: Context): Float {
+    return this * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+fun Float.pxToDp(context: Context): Float {
+    return this / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+val ColorEnvelope.hexCodeWithReshetochkots: String
+    get() {
+        return "#${hexCode}"
+    }

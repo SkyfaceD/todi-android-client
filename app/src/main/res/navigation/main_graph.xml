@@ -91,7 +91,16 @@
         <fragment
             android:id="@+id/settings_fragment"
             android:name="org.skyfaced.todi.ui.settings.SettingsFragment"
-            tools:layout="@layout/fragment_settings" />
+            tools:layout="@layout/fragment_settings">
+            <action
+                android:id="@+id/action_settings_fragment_to_decor_settings_fragment"
+                app:destination="@id/decor_settings_fragment" />
+        </fragment>
+
+        <fragment
+            android:id="@+id/decor_settings_fragment"
+            android:name="org.skyfaced.todi.ui.settings.decor.DecorSettingsFragment"
+            tools:layout="@layout/fragment_decor_settings" />
     </navigation>
 
 </navigation>
