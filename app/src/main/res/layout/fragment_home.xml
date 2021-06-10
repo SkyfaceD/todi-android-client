@@ -13,9 +13,10 @@
         android:layout_height="50dp"
         android:layout_margin="8dp"
         android:background="@drawable/bg_home_search"
+        android:backgroundTint="#F2F2F2"
         android:gravity="center_vertical"
+        android:translationZ="0.1dp"
         android:orientation="horizontal"
-        android:translationZ="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -83,8 +84,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:pressedTranslationZ="0dp"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExtendedFloatingActionButton"
-        app:strokeColor="@color/grey_light_900"
-        app:strokeWidth="@dimen/app_stroke_width" />
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.ExtendedFloatingActionButton" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
