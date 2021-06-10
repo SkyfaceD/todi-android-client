@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -62,8 +63,13 @@ dependencies {
     //DI
     implementation "io.insert-koin:koin-android:$koinVersion"
 
+    //Markdown
     implementation "io.noties.markwon:editor:$markwonVersion"
     implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
     implementation "io.noties.markwon:ext-tasklist:$markwonVersion"
     implementation "io.noties.markwon:ext-tables:$markwonVersion"
+
+    //Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 }
