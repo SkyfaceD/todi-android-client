@@ -16,9 +16,41 @@ import org.skyfaced.todi.utils.enums.CornerFamily
 import org.skyfaced.todi.utils.enums.CornerSide
 import org.skyfaced.todi.utils.extensions.dpToPx
 
+//@Deprecated("Awful solution", level = DeprecationLevel.WARNING)
+//class CustomProperty<T : Any> : ReadWriteProperty<ViewHelper, T> {
+//    @OptIn(ExperimentalStdlibApi::class)
+//    @Suppress("UNCHECKED_CAST")
+//    override fun getValue(thisRef: ViewHelper, property: KProperty<*>): T {
+//        val key = SP_NAME + property.name
+//        var value = thisRef.preferences.all[key]
+//        if (property.returnType.isSubtypeOf(typeOf<CornerFamily>())) {
+//            value = CornerFamily.valueOf(value as? String ?: "ROUND")
+//        }
+//        return value as? T ?: "#FF484848" as T
+//    }
+//
+//    override fun setValue(thisRef: ViewHelper, property: KProperty<*>, value: T) {
+//        thisRef.preferences.edit { put(property.name, value) }
+//        if (thisRef.autoInvalidate) thisRef.invalidate()
+//    }
+//}
+//
+//fun <T: Any> customProperty() = CustomProperty<T>()
+//
+//@Suppress("NAME_SHADOWING")
+//fun <T> SharedPreferences.Editor.put(key: String, value: T) {
+//    val key = SP_NAME + key
+//    when (value) {
+//        is CornerFamily -> putString(key, value.name)
+//        is String -> putString(key, value)
+//        is Float -> putFloat(key, value)
+//    }
+//}
+
+@Deprecated("Too bad", level = DeprecationLevel.WARNING)
 class ViewHelper(
-    private val autoInvalidate: Boolean = false,
-    private val preferences: SharedPreferences
+    val autoInvalidate: Boolean = false,
+    val preferences: SharedPreferences
 ) {
     var cornerFamily: CornerFamily = preferences.getString(SP_CORNER_FAMILY, null)?.let {
         CornerFamily.valueOf(it)
