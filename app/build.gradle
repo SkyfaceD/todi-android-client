@@ -62,4 +62,8 @@ dependencies {
     //DI
     implementation "io.insert-koin:koin-android:$koinVersion"
 
+    implementation "io.noties.markwon:editor:$markwonVersion"
+    implementation "io.noties.markwon:ext-strikethrough:$markwonVersion"
+    implementation "io.noties.markwon:ext-tasklist:$markwonVersion"
+    implementation "io.noties.markwon:ext-tables:$markwonVersion"
 }
