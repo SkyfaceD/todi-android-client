@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Menu -->
+    <string name="bottom_navigation_menu_home">Главная</string>
+    <string name="bottom_navigation_menu_profile">Профиль</string>
+
+    <!-- Hint -->
+    <string name="hint_username">Имя пользователя</string>
+    <string name="hint_password">Пароль</string>
+    <string name="hint_confirm_password">Подтвердите пароль</string>
+
+    <!-- Helper -->
+    <string name="helper_username">Не стоит использовать свой адрес электронной почты в качестве имени пользователя</string>
+    <string name="helper_password">Минимальная длина пароля - 8 символов</string>
+
+    <!-- Content Description -->
+    <string name="cd_application_logo">Логотип приложения</string>
+
+    <!-- Other -->
+    <string name="sign_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="continue_as_guest">Продолжить как Гость</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="next">Next</string>
+</resources>

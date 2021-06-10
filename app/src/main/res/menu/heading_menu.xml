@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="HardcodedText">
+    <item
+        android:id="@+id/heading_one"
+        android:orderInCategory="1"
+        android:title="H1" />
+    <item
+        android:id="@+id/heading_two"
+        android:orderInCategory="2"
+        android:title="H2" />
+    <item
+        android:id="@+id/heading_three"
+        android:orderInCategory="3"
+        android:title="H3" />
+    <item
+        android:id="@+id/heading_four"
+        android:orderInCategory="4"
+        android:title="H4" />
+    <item
+        android:id="@+id/heading_five"
+        android:orderInCategory="5"
+        android:title="H5" />
+    <item
+        android:id="@+id/heading_six"
+        android:orderInCategory="6"
+        android:title="H6" />
+</menu>

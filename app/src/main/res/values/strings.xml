@@ -1,3 +1,62 @@
 <resources>
-    <string name="application_name">todi</string>
+    <!-- Menu -->
+    <string name="bottom_navigation_menu_home">Main</string>
+    <string name="bottom_navigation_menu_profile">Profile</string>
+
+    <!-- Hint -->
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="hint_search">Search</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_markdown">Description (You can use markdown)</string>
+
+    <!-- Error -->
+    <string name="error_fill_empty_field">Fill empty field</string>
+    <string name="error_username_length">Minimum username length is %d characters</string>
+    <string name="error_username_already_taken">This username is already taken</string>
+    <string name="error_confirm_password">Passwords not equals</string>
+    <string name="error_password_length">Minimum password length is %d characters</string>
+
+    <!-- Helper -->
+    <string name="helper_username">Don\'t use your email login as username</string>
+    <string name="helper_password">Minimum password length is 8 characters</string>
+
+    <!-- Content Description -->
+    <string name="cd_application_logo">Application logo</string>
+    <string name="cd_search">Search</string>
+    <string name="cd_settings">Settings</string>
+    <string name="cd_preview">Preview</string>
+
+    <!-- Other -->
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="welcome">Welcome!</string>
+    <string name="next">Next</string>
+    <string name="add_task">Add Task</string>
+    <string name="edit_task">Edit Task</string>
+    <string name="save">Save</string>
+    <string name="bulleted_list">Bulleted list</string>
+    <string name="numbered_list">Numbered list</string>
+    <string name="task_list">Task list</string>
+    <string name="table_insert">Table insert</string>
+    <string name="table_counter">Table %1$d×%2$d</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="preview">Preview</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+
+    <string name="settings_decor_title">Decor</string>
+    <string name="settings_decor_summary">Themes, corners</string>
+
+    <string name="corner_type">Corner Type</string>
+    <string name="corner_type_round">Round</string>
+    <string name="corner_type_cut">Cut</string>
+    <string name="corner_type_square">Square</string>
+    <string name="corner_size">Corner Size</string>
+    <string name="border_color">Border Color</string>
 </resources>
