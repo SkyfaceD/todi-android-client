@@ -19,11 +19,11 @@ import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.DialogTableBinding
 import org.skyfaced.todi.databinding.FragmentDetailBinding
-import org.skyfaced.todi.markdown.Markdown
 import org.skyfaced.todi.models.cell.Cell
 import org.skyfaced.todi.ui.custom.cell.CellPickerListener
 import org.skyfaced.todi.utils.enums.Wrapper
 import org.skyfaced.todi.utils.extensions.*
+import org.skyfaced.todi.utils.markdown.Markdown
 
 @SuppressLint("RestrictedApi")
 class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
@@ -81,9 +81,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                     markdown.editor
                 )
             )
-//            edtTaskMarkdown.setOnFocusChangeListener { _, hasFocus ->
-//                quickAccess.isInvisible = !hasFocus
-//            }
         }
     }
 
@@ -99,26 +96,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
 
             return@lazyUnsafe popup
         }
-    }
-
-    private val tableDialog: AlertDialog by lazyUnsafe {
-        return@lazyUnsafe MaterialAlertDialogBuilder(requireContext()).apply {
-            _tableBinding = DialogTableBinding.inflate(layoutInflater, null, false)
-            with(tableBinding) {
-                cellPicker.cellPickerListener = this@DetailFragment
-                txtCell.text = getString(R.string.table_counter, 1, 1)
-                setView(root)
-                setNegativeButton(R.string.cancel, null)
-                setPositiveButton(R.string.ok) { _, _ ->
-                    val cell = cellPicker.currentCell
-                    markdown.tableWrap(binding.edtTaskMarkdown.crop(), cell, ::replaceAndSelect)
-                }
-                setOnDismissListener {
-                    cellPicker.resetCell()
-                    txtCell.text = getString(R.string.table_counter, 1, 1)
-                }
-            }
-        }.create()
     }
 
     private val listMenu: PopupMenu by lazyUnsafe {
@@ -163,13 +140,35 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
         return@lazyUnsafe popup
     }
 
+    private val tableDialog: AlertDialog by lazyUnsafe {
+        return@lazyUnsafe MaterialAlertDialogBuilder(requireContext()).apply {
+            _tableBinding = DialogTableBinding.inflate(layoutInflater, null, false)
+            with(tableBinding) {
+                cellPicker.cellPickerListener = this@DetailFragment
+                txtCell.text = getString(R.string.table_counter, 1, 1)
+                setView(root)
+                setNegativeButton(R.string.cancel, null)
+                setPositiveButton(R.string.ok) { _, _ ->
+                    val cell = cellPicker.currentCell
+                    markdown.tableWrap(binding.edtTaskMarkdown.crop(), cell, ::replaceAndSelect)
+                }
+                setOnDismissListener {
+                    cellPicker.resetCell()
+                    txtCell.text = getString(R.string.table_counter, 1, 1)
+                }
+            }
+        }.create()
+    }
+
     private fun replaceAndSelect(wrapped: String, selection: Int) {
         binding.edtTaskMarkdown.replace(wrapped)
+        binding.edtTaskMarkdown.requestFocus()
         binding.edtTaskMarkdown.setSelection(selection)
     }
 
     private fun replaceAndSelect(wrapped: String, selection: IntRange) {
         binding.edtTaskMarkdown.replace(wrapped)
+        binding.edtTaskMarkdown.requestFocus()
         binding.edtTaskMarkdown.setSelection(selection.first, selection.last)
     }
 

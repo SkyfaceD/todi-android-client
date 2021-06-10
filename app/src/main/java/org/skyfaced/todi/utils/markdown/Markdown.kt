@@ -1,4 +1,4 @@
-package org.skyfaced.todi.markdown
+package org.skyfaced.todi.utils.markdown
 
 import android.widget.TextView
 import io.noties.markwon.editor.MarkwonEditor
