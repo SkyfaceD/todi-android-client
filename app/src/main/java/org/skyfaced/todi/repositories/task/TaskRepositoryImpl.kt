@@ -11,13 +11,13 @@ class TaskRepositoryImpl(private val dao: TaskDao) : TaskRepository {
         return taskEntity.toTask()
     }
 
-    override fun getById(id: String): Task {
+    override suspend fun getById(id: String): Task {
         return dao
             .getById(UUID.fromString(id))
             .toTask()
     }
 
-    override fun getAll(): List<Task> {
+    override suspend fun getAll(): List<Task> {
         return dao
             .getAll()
             .map(TaskEntity::toTask)

@@ -9,8 +9,8 @@ import java.util.*
 @Dao
 abstract class TaskDao : BaseDao<TaskEntity> {
     @Query("SELECT * FROM ${TaskEntity.TableName} WHERE id = :id")
-    abstract fun getById(id: UUID): TaskEntity
+    abstract suspend fun getById(id: UUID): TaskEntity
 
     @Query("SELECT * FROM ${TaskEntity.TableName} ORDER BY createdAt DESC")
-    abstract fun getAll(): List<TaskEntity>
+    abstract suspend fun getAll(): List<TaskEntity>
 }
