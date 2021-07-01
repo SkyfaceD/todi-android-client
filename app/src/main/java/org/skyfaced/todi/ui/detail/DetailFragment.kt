@@ -6,30 +6,38 @@ import android.os.Build
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
+import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.noties.markwon.editor.MarkwonEditorTextWatcher
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.skyfaced.todi.R
+import org.skyfaced.todi.database.entities.TaskEntity
 import org.skyfaced.todi.databinding.DialogTableBinding
 import org.skyfaced.todi.databinding.FragmentDetailBinding
 import org.skyfaced.todi.models.cell.Cell
+import org.skyfaced.todi.models.markdown.Crop
 import org.skyfaced.todi.ui.custom.cell.CellPickerListener
 import org.skyfaced.todi.utils.enums.Wrapper
 import org.skyfaced.todi.utils.extensions.*
 import org.skyfaced.todi.utils.markdown.Markdown
+import java.util.*
 
 @SuppressLint("RestrictedApi")
 class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
     private val binding by viewBinding(FragmentDetailBinding::bind)
     private var _tableBinding: DialogTableBinding? = null
     private val tableBinding get() = checkNotNull(_tableBinding) { "Binding isn't initialized" }
+    private val viewModel: DetailViewModel by viewModel()
     private val markdown: Markdown by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,20 +53,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
 
             btnHeading.setOnClickListener { headingMenu.show() }
             btnBold.setOnClickListener {
-                markdown.simpleWrap(edtTaskMarkdown.crop(), Wrapper.Bold, ::replaceAndSelect)
+                markdown.simpleWrap(cropped, Wrapper.Bold, ::replaceAndSelect)
             }
             btnItalic.setOnClickListener {
-                markdown.simpleWrap(edtTaskMarkdown.crop(), Wrapper.Italic, ::replaceAndSelect)
+                markdown.simpleWrap(cropped, Wrapper.Italic, ::replaceAndSelect)
             }
             btnStrike.setOnClickListener {
-                markdown.simpleWrap(edtTaskMarkdown.crop(), Wrapper.Strike, ::replaceAndSelect)
+                markdown.simpleWrap(cropped, Wrapper.Strike, ::replaceAndSelect)
             }
-            btnCode.setOnClickListener {
-                markdown.codeWrap(edtTaskMarkdown.crop(), ::replaceAndSelect)
-            }
-            btnLink.setOnClickListener {
-                markdown.linkWrap(edtTaskMarkdown.crop(), ::replaceAndSelect)
-            }
+            btnCode.setOnClickListener { markdown.codeWrap(cropped, ::replaceAndSelect) }
+            btnLink.setOnClickListener { markdown.linkWrap(cropped, ::replaceAndSelect) }
             btnList.setOnClickListener { listMenu.show() }
             btnTable.setOnClickListener { tableDialog.show() }
 
@@ -90,7 +94,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
             popup.menuInflater.inflate(R.menu.heading_menu, popup.menu)
 
             popup.setOnMenuItemClickListener { menuItem: MenuItem ->
-                markdown.headingWrap(edtTaskMarkdown.crop(), menuItem.order, ::replaceAndSelect)
+                markdown.headingWrap(cropped, menuItem.order, ::replaceAndSelect)
                 true
             }
 
@@ -133,7 +137,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                 R.id.list_task -> Wrapper.TaskList
                 else -> throw IllegalArgumentException("Can't define wrapper by ${menuItem.itemId} id")
             }
-            markdown.listWrap(binding.edtTaskMarkdown.crop(), wrapper, ::replaceAndSelect)
+            markdown.listWrap(cropped, wrapper, ::replaceAndSelect)
             true
         }
 
@@ -150,7 +154,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                 setNegativeButton(R.string.cancel, null)
                 setPositiveButton(R.string.ok) { _, _ ->
                     val cell = cellPicker.currentCell
-                    markdown.tableWrap(binding.edtTaskMarkdown.crop(), cell, ::replaceAndSelect)
+                    markdown.tableWrap(cropped, cell, ::replaceAndSelect)
                 }
                 setOnDismissListener {
                     cellPicker.resetCell()
@@ -160,16 +164,36 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
         }.create()
     }
 
+    private val cropped: Crop get() = binding.edtTaskMarkdown.crop()
+
+    private val EditText.start: Int get() = selectionStart.coerceAtMost(selectionEnd)
+
+    private val EditText.end: Int get() = selectionStart.coerceAtLeast(selectionEnd)
+
+    private fun EditText.crop(): Crop {
+        val start = start
+        val end = end
+        return Crop(text.substring(start, end), start, end)
+    }
+
+    private fun EditText.replace(replacement: String) {
+        text.replace(start, end, replacement)
+    }
+
     private fun replaceAndSelect(wrapped: String, selection: Int) {
-        binding.edtTaskMarkdown.replace(wrapped)
-        binding.edtTaskMarkdown.requestFocus()
-        binding.edtTaskMarkdown.setSelection(selection)
+        with(binding.edtTaskMarkdown) {
+            requestFocus()
+            replace(wrapped)
+            setSelection(selection)
+        }
     }
 
     private fun replaceAndSelect(wrapped: String, selection: IntRange) {
-        binding.edtTaskMarkdown.replace(wrapped)
-        binding.edtTaskMarkdown.requestFocus()
-        binding.edtTaskMarkdown.setSelection(selection.first, selection.last)
+        with(binding.edtTaskMarkdown) {
+            requestFocus()
+            replace(wrapped)
+            setSelection(selection.first, selection.last)
+        }
     }
 
     override fun onDestroyView() {
@@ -179,5 +203,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
 
     override fun onCellChanged(cell: Cell) {
         tableBinding.txtCell.text = getString(R.string.table_counter, cell.ratioX, cell.ratioY)
+    }
+
+    companion object {
+        private const val TAG = "DetailFragment"
     }
 }
