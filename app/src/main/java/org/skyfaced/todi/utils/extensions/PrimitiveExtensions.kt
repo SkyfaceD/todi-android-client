@@ -15,11 +15,11 @@ fun Long.toDate(pattern: String = "EEEE, dd MMMM yyyy hh:mm aaa"): String {
     return SimpleDateFormat(pattern, locale).format(date)
 }
 
-fun Float.dpToPx(context: Context): Float {
+fun Float.dp(context: Context): Float {
     return this * (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
 }
 
-fun Float.pxToDp(context: Context): Float {
+fun Float.px(context: Context): Float {
     return this / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
 }
 
