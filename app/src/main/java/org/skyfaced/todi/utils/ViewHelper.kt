@@ -14,7 +14,7 @@ import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import org.skyfaced.todi.utils.enums.CornerFamily
 import org.skyfaced.todi.utils.enums.CornerSide
-import org.skyfaced.todi.utils.extensions.dpToPx
+import org.skyfaced.todi.utils.extensions.dp
 
 //@Deprecated("Awful solution", level = DeprecationLevel.WARNING)
 //class CustomProperty<T : Any> : ReadWriteProperty<ViewHelper, T> {
@@ -128,7 +128,7 @@ class ViewHelper(
 
         val shapeDrawable = MaterialShapeDrawable(shapeAppearanceModel).apply {
             setFillColor(view.colorStateList)
-            setStroke(borderSize.dpToPx(view.context), Color.parseColor(borderColor))
+            setStroke(borderSize.dp(view.context), Color.parseColor(borderColor))
             setElevation(0f)
         }
 

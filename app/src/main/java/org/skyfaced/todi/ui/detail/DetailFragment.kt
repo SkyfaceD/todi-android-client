@@ -51,6 +51,27 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
             markdown.setMarkdown(btnItalic, "I" wrapWith Wrapper.Italic)
             markdown.setMarkdown(btnStrike, "S" wrapWith Wrapper.Strike)
 
+            btnSave.setOnClickListener {
+                if (edtTaskName.text.isNullOrEmpty()) {
+                    tilTaskName.error = getString(R.string.error_fill_empty_field)
+                    return@setOnClickListener
+                }
+
+                val taskEntity = TaskEntity(
+                    UUID.randomUUID(),
+                    edtTaskName.text.toString(),
+                    edtTaskMarkdown.text.toString(),
+                    Date(System.currentTimeMillis())
+                )
+
+                viewModel.save(taskEntity)
+            }
+
+            edtTaskName.doAfterTextChanged {
+                tilTaskName.error =
+                    if (tilTaskName.isErrorEnabled) null else return@doAfterTextChanged
+            }
+
             btnHeading.setOnClickListener { headingMenu.show() }
             btnBold.setOnClickListener {
                 markdown.simpleWrap(cropped, Wrapper.Bold, ::replaceAndSelect)
@@ -85,6 +106,10 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                     markdown.editor
                 )
             )
+
+            viewModel.saveNotification.observe(viewLifecycleOwner) { taskEntity ->
+                findNavController().popBackStack()
+            }
         }
     }
 

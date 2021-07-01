@@ -2,9 +2,11 @@ package org.skyfaced.todi.utils.extensions
 
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.content.res.Configuration.ORIENTATION_PORTRAIT
-import android.widget.EditText
 import androidx.constraintlayout.widget.Guideline
-import org.skyfaced.todi.models.markdown.Crop
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 fun Guideline.setPercentByOrientation(
     orientation: Int,
@@ -17,16 +19,12 @@ fun Guideline.setPercentByOrientation(
     }
 }
 
-val EditText.start: Int get() = selectionStart.coerceAtMost(selectionEnd)
-
-val EditText.end: Int get() = selectionStart.coerceAtLeast(selectionEnd)
-
-fun EditText.crop(): Crop {
-    val start = start
-    val end = end
-    return Crop(text.substring(start, end), start, end)
-}
-
-fun EditText.replace(replacement: String) {
-    text.replace(start, end, replacement)
-}
+val RecyclerView.LayoutManager.firstVisibleItemPosition: Int
+    get() {
+        return when (this) {
+            is StaggeredGridLayoutManager -> findFirstCompletelyVisibleItemPositions(null)[0]
+            is GridLayoutManager -> findFirstVisibleItemPosition()
+            is LinearLayoutManager -> findFirstVisibleItemPosition()
+            else -> throw IllegalArgumentException("Can't define layout manager $this")
+        }
+    }

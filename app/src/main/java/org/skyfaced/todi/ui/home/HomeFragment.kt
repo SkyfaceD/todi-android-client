@@ -6,20 +6,20 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentHomeBinding
+import org.skyfaced.todi.ui.home.adapter.HomeAdapter
 import org.skyfaced.todi.utils.SPAN_COUNT_LANDSCAPE
 import org.skyfaced.todi.utils.SPAN_COUNT_PORTRAIT
+import org.skyfaced.todi.utils.extensions.firstVisibleItemPosition
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
-    private val viewModel: HomeViewModel by inject()
+    private val viewModel: HomeViewModel by viewModel()
 
     private lateinit var adapter: HomeAdapter
 
@@ -28,6 +28,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding) {
             setupAdapter()
             setupButton()
+            setupObservers()
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
+            adapter.submitList(tasks)
         }
     }
 
@@ -35,7 +42,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun FragmentHomeBinding.setupAdapter() {
         val orientation = requireActivity().resources.configuration.orientation
 
-        adapter = HomeAdapter { dummyData ->
+        adapter = HomeAdapter {
             val direction = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
             findNavController().navigate(direction)
         }
@@ -46,17 +53,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 val layoutManager = recyclerView.layoutManager
-                val firstVisibleItemPosition = when (layoutManager) {
-                    is StaggeredGridLayoutManager ->
-                        layoutManager.findFirstCompletelyVisibleItemPositions(null)[0]
-                    is GridLayoutManager ->
-                        layoutManager.findFirstVisibleItemPosition()
-                    is LinearLayoutManager ->
-                        layoutManager.findFirstVisibleItemPosition()
-                    else -> throw IllegalArgumentException("Can't define layout manager $layoutManager")
-                }
-
-                viewModel.firstVisibleItemPosition = firstVisibleItemPosition
+                viewModel.firstVisibleItemPosition = layoutManager?.firstVisibleItemPosition ?: 0
             }
         })
 

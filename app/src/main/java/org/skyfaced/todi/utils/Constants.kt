@@ -2,6 +2,8 @@ package org.skyfaced.todi.utils
 
 const val APPLICATION_NAME = "TODI"
 
+const val DATABASE_NAME = APPLICATION_NAME + "Database"
+
 const val SP_NAME = APPLICATION_NAME + "SharedPreferences"
 const val SP_CORNER_FAMILY = SP_NAME + "CornerFamily"
 const val SP_CORNER_SIZE = SP_NAME + "CornerSize"
