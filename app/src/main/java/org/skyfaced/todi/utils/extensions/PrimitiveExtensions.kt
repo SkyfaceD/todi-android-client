@@ -23,6 +23,14 @@ fun Float.px(context: Context): Float {
     return this / (context.resources.displayMetrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT)
 }
 
+//TODO
+///**
+// * @return [UUID] if it valid, otherwise empty string
+// */
+//fun String.asUUID() = try { UUID.fromString(this) } catch (e: Exception) { null }
+
+fun String.asUUID() = UUID.fromString(this)
+
 infix fun String.wrapWith(wrapper: Wrapper): String = wrapper.value + this + wrapper.value
 
 infix fun String.space(str: String): String = "$this $str"

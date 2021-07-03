@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = TaskEntity.TableName)
-data class TaskEntity(
+class TaskEntity(
     @PrimaryKey
     val id: UUID,
     val title: String,
