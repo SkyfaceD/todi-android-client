@@ -1,6 +1,7 @@
 package org.skyfaced.todi.utils.markdown
 
 import android.content.Context
+import android.webkit.URLUtil
 import android.widget.TextView
 import io.noties.markwon.Markwon
 import io.noties.markwon.SoftBreakAddsNewLinePlugin
@@ -14,9 +15,6 @@ import io.noties.markwon.ext.tasklist.TaskListPlugin
 import org.skyfaced.todi.models.cell.Cell
 import org.skyfaced.todi.models.markdown.Crop
 import org.skyfaced.todi.utils.enums.Wrapper
-import org.skyfaced.todi.utils.extensions.isLink
-import org.skyfaced.todi.utils.extensions.isMultiline
-import org.skyfaced.todi.utils.extensions.space
 import org.skyfaced.todi.utils.extensions.wrapWith
 
 class MarkdownImpl(applicationContext: Context) : Markdown {
@@ -163,5 +161,13 @@ class MarkdownImpl(applicationContext: Context) : Markdown {
             sb.append("|  ".repeat(x).plus("|\n"))
         }
         return sb.toString().replaceFirst("\n", "\n${"|---".repeat(x)}|\n")
+    }
+
+    private infix fun String.space(str: String): String = "$this $str"
+
+    private fun String.isLink() = URLUtil.isValidUrl(this)
+
+    private fun String.isMultiline(): Boolean {
+        return contains("\n")
     }
 }

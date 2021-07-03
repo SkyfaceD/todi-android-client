@@ -2,7 +2,6 @@ package org.skyfaced.todi.utils.extensions
 
 import android.content.Context
 import android.util.DisplayMetrics
-import android.webkit.URLUtil
 import org.skyfaced.todi.utils.enums.Wrapper
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,11 +31,3 @@ fun Float.px(context: Context): Float {
 fun String.asUUID() = UUID.fromString(this)
 
 infix fun String.wrapWith(wrapper: Wrapper): String = wrapper.value + this + wrapper.value
-
-infix fun String.space(str: String): String = "$this $str"
-
-fun String.isLink() = URLUtil.isValidUrl(this)
-
-fun String.isMultiline(): Boolean {
-    return contains("\n")
-}
