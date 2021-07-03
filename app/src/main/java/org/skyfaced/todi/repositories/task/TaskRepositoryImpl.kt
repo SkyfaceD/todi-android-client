@@ -1,7 +1,8 @@
 package org.skyfaced.todi.repositories.task
 
-import org.skyfaced.todi.database.dao.TaskDao
-import org.skyfaced.todi.database.entities.TaskEntity
+import org.skyfaced.todi.database.dao.task.TaskDao
+import org.skyfaced.todi.database.entities.task.TaskEntity
+import org.skyfaced.todi.mappers.task.toTask
 import org.skyfaced.todi.models.task.Task
 import java.util.*
 

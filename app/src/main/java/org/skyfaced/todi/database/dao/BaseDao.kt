@@ -1,4 +1,4 @@
-package org.skyfaced.todi.database
+package org.skyfaced.todi.database.dao
 
 import androidx.room.Delete
 import androidx.room.Insert

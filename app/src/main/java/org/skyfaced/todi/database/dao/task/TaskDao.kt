@@ -1,9 +1,9 @@
-package org.skyfaced.todi.database.dao
+package org.skyfaced.todi.database.dao.task
 
 import androidx.room.Dao
 import androidx.room.Query
-import org.skyfaced.todi.database.BaseDao
-import org.skyfaced.todi.database.entities.TaskEntity
+import org.skyfaced.todi.database.dao.BaseDao
+import org.skyfaced.todi.database.entities.task.TaskEntity
 import java.util.*
 
 @Dao

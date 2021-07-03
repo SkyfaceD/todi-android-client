@@ -14,6 +14,6 @@ enum class Wrapper(val value: String) {
     val binary: Int = 1 shl ordinal
 
     companion object {
-        val simple get() = Bold.binary or Italic.binary or Strike.binary
+        val simple = Bold.binary or Italic.binary or Strike.binary
     }
 }

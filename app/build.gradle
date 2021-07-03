@@ -91,4 +91,7 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 }

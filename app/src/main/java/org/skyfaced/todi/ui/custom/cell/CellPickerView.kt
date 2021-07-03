@@ -10,7 +10,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import org.skyfaced.todi.models.cell.Cell
-import org.skyfaced.todi.utils.extensions.lazyUnsafe
+import org.skyfaced.todi.utils.extensions.lazySafetyNone
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -21,22 +21,6 @@ class CellPickerView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     private val isDebug: Boolean = false
 ) : View(context, attrs, defStyleAttr) {
-    companion object {
-        const val TAG = "CellPicker"
-        const val CELL_ROWS = 3
-        const val CELL_COLUMNS = 3
-        const val CELL_WIDTH = 150f
-        const val CELL_HEIGHT = 140f
-        const val CELL_GAP = 16f
-        const val CELL_CORNER_RADIUS = CELL_WIDTH / 6
-        val CELL_BOUNDS by lazyUnsafe { RectF(0f, 0f, CELL_WIDTH, CELL_HEIGHT) }
-        const val VIEW_MARGIN = 44f
-        val INACTIVE_COLOR by lazyUnsafe { Color.parseColor("#E0E0E0") }
-        val ACTIVE_COLOR by lazyUnsafe { Color.parseColor("#AB47BC") }
-        val STROKE_COLOR by lazyUnsafe { Color.parseColor("#66000000") }
-        const val STROKE_WIDTH = 8f
-    }
-
     private lateinit var canvas: Canvas
     private val paint = Paint()
     private val textPaint = Paint()
@@ -164,7 +148,6 @@ class CellPickerView @JvmOverloads constructor(
         return cell
     }
 
-    @Suppress("NAME_SHADOWING")
     private fun euclideanDistance(x1: Float, y1: Float, x2: Float, y2: Float): Float {
         return sqrt((x2 - x1).pow(2) + (y2 - y1).pow(2))
     }
@@ -178,5 +161,24 @@ class CellPickerView @JvmOverloads constructor(
         }
 
         invalidate()
+    }
+
+    companion object {
+        const val TAG = "CellPicker"
+
+        const val CELL_ROWS = 3
+        const val CELL_COLUMNS = 3
+        const val CELL_WIDTH = 150f
+        const val CELL_HEIGHT = 140f
+        const val CELL_GAP = 16f
+        const val CELL_CORNER_RADIUS = CELL_WIDTH / 6
+        val CELL_BOUNDS by lazySafetyNone { RectF(0f, 0f, CELL_WIDTH, CELL_HEIGHT) }
+
+        val INACTIVE_COLOR by lazySafetyNone { Color.parseColor("#E0E0E0") }
+        val ACTIVE_COLOR by lazySafetyNone { Color.parseColor("#AB47BC") }
+        val STROKE_COLOR by lazySafetyNone { Color.parseColor("#66000000") }
+
+        const val VIEW_MARGIN = 44f
+        const val STROKE_WIDTH = 8f
     }
 }

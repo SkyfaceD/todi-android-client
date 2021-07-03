@@ -94,7 +94,7 @@ class MarkdownImpl(applicationContext: Context) : Markdown {
         wrap: (wrapped: String, selection: IntRange) -> Unit
     ) {
         val cropped = crop.text
-        val wrapped = formatList(cropped)
+        val wrapped = formatLink(cropped)
 
         val selection = when {
             cropped.isEmpty() || cropped.isLink() -> (crop.start + 1..crop.start + 5)
@@ -108,7 +108,7 @@ class MarkdownImpl(applicationContext: Context) : Markdown {
     }
 
     private val link = "[%s](%s)"
-    private fun formatList(word: String): String {
+    private fun formatLink(word: String): String {
         if (word.isEmpty()) return link.format("text", "url")
         if (word.isLink()) return link.format("text", word)
         return link.format(word, "url")

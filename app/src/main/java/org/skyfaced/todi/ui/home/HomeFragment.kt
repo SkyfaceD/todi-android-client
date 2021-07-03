@@ -5,14 +5,18 @@ import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentHomeBinding
-import org.skyfaced.todi.ui.home.adapter.HomeAdapter
 import org.skyfaced.todi.utils.SPAN_COUNT_LANDSCAPE
 import org.skyfaced.todi.utils.SPAN_COUNT_PORTRAIT
 import org.skyfaced.todi.utils.extensions.firstVisibleItemPosition
@@ -28,13 +32,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         with(binding) {
             setupAdapter()
             setupButton()
-            setupObservers()
-        }
-    }
 
-    private fun setupObservers() {
-        viewModel.tasks.observe(viewLifecycleOwner) { tasks ->
-            adapter.submitList(tasks)
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.tasks.flowWithLifecycle(
+                    viewLifecycleOwner.lifecycle,
+                    Lifecycle.State.RESUMED
+                ).collect { tasks ->
+                    adapter.submitList(tasks)
+                }
+            }
         }
     }
 
@@ -85,5 +91,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             configureRecyclerView(newConfig.orientation)
             recycler.scrollToPosition(viewModel.firstVisibleItemPosition)
         }
+    }
+
+    companion object {
+        private const val TAG = "HomeFragment"
     }
 }

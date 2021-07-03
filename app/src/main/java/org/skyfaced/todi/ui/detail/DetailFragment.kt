@@ -21,7 +21,7 @@ import io.noties.markwon.editor.MarkwonEditorTextWatcher
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.skyfaced.todi.R
-import org.skyfaced.todi.database.entities.TaskEntity
+import org.skyfaced.todi.database.entities.task.TaskEntity
 import org.skyfaced.todi.databinding.DialogTableBinding
 import org.skyfaced.todi.databinding.FragmentDetailBinding
 import org.skyfaced.todi.models.cell.Cell
@@ -107,13 +107,13 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                 )
             )
 
-            viewModel.saveNotification.observe(viewLifecycleOwner) { taskEntity ->
+            viewModel.saveNotification.observe(viewLifecycleOwner) { task ->
                 findNavController().popBackStack()
             }
         }
     }
 
-    private val headingMenu: PopupMenu by lazyUnsafe {
+    private val headingMenu: PopupMenu by lazySafetyNone {
         with(binding) {
             val popup = PopupMenu(requireContext(), btnHeading)
             popup.menuInflater.inflate(R.menu.heading_menu, popup.menu)
@@ -123,11 +123,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                 true
             }
 
-            return@lazyUnsafe popup
+            return@lazySafetyNone popup
         }
     }
 
-    private val listMenu: PopupMenu by lazyUnsafe {
+    private val listMenu: PopupMenu by lazySafetyNone {
         val popup = PopupMenu(requireContext(), binding.btnList)
         popup.menuInflater.inflate(R.menu.list_menu, popup.menu)
 
@@ -166,11 +166,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
             true
         }
 
-        return@lazyUnsafe popup
+        return@lazySafetyNone popup
     }
 
-    private val tableDialog: AlertDialog by lazyUnsafe {
-        return@lazyUnsafe MaterialAlertDialogBuilder(requireContext()).apply {
+    private val tableDialog: AlertDialog by lazySafetyNone {
+        return@lazySafetyNone MaterialAlertDialogBuilder(requireContext()).apply {
             _tableBinding = DialogTableBinding.inflate(layoutInflater, null, false)
             with(tableBinding) {
                 cellPicker.cellPickerListener = this@DetailFragment
