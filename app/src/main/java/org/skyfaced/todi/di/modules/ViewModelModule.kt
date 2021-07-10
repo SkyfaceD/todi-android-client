@@ -4,10 +4,13 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import org.skyfaced.todi.ui.detail.DetailViewModel
 import org.skyfaced.todi.ui.home.HomeViewModel
+import org.skyfaced.todi.ui.signIn.SignInViewModel
 import org.skyfaced.todi.ui.signUp.SignUpViewModel
 
 val viewModelModule = module {
-    viewModel { SignUpViewModel() }
+    viewModel { SignUpViewModel(get()) }
+
+    viewModel { SignInViewModel(get()) }
 
     viewModel { HomeViewModel(get()) }
 

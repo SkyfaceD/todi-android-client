@@ -10,7 +10,7 @@ import org.skyfaced.todi.database.dao.user.UserDao
 import org.skyfaced.todi.database.entities.task.TaskEntity
 import org.skyfaced.todi.database.entities.user.UserEntity
 
-@Database(entities = [TaskEntity::class, UserEntity::class], version = 2, exportSchema = true)
+@Database(entities = [TaskEntity::class, UserEntity::class], version = 3, exportSchema = true)
 @TypeConverters(UUIDConverter::class, DateConverter::class)
 abstract class ApplicationDatabase : RoomDatabase() {
     abstract val taskDao: TaskDao

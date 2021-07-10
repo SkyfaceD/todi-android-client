@@ -107,7 +107,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
                 )
             )
 
-            viewModel.saveNotification.observe(viewLifecycleOwner) { task ->
+            viewModel.saveNotification.observe(viewLifecycleOwner) {
                 findNavController().popBackStack()
             }
         }

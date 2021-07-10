@@ -5,15 +5,22 @@ import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Configuration.*
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignUpBinding
@@ -22,7 +29,6 @@ import org.skyfaced.todi.utils.MIN_USERNAME_LENGTH
 import org.skyfaced.todi.utils.extensions.setPercentByOrientation
 
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
-
     private val binding by viewBinding(FragmentSignUpBinding::bind)
     private val viewModel: SignUpViewModel by inject()
 
@@ -55,9 +61,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 return@setOnClickListener
             }
 
-            //TODO network work
+            //FIXME
+            if (runBlocking { viewModel.isUsernameFree(username) }) {
+                tilUsername.error = getString(R.string.error_username_already_taken)
+                return@setOnClickListener
+            }
 
-            //For test purpose
             viewModel.toggleGroup()
             edtPassword.requestFocus()
         }
@@ -76,22 +85,20 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             val list = listOf(tilPassword, tilConfirmPassword)
             if (list.any { it.isErrorEnabled }) {
                 list.filter { it.isErrorEnabled }.forEach { it.startAnimation(shakeAnimation) }
-
                 return@setOnClickListener
             }
 
             if (password != confirmPassword) {
                 tilConfirmPassword.error = getString(R.string.error_confirm_password)
                 tilConfirmPassword.startAnimation(shakeAnimation)
-
                 return@setOnClickListener
             }
 
-            //TODO network work
-
-            //For test purpose
-            val direction = SignUpFragmentDirections.actionSignUpFragmentToSignInFragment()
-            findNavController().navigate(direction)
+            //FIXME
+            viewModel.registerUser(
+                edtUsername.text?.toString() ?: "",
+                edtPassword.text?.toString() ?: ""
+            )
         }
     }
 
@@ -121,6 +128,18 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         viewModel.visibleGroup.observe(viewLifecycleOwner) { state ->
             grpUsername.isVisible = state
             grpPassword.isVisible = !state
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.registration.flowWithLifecycle(
+                viewLifecycleOwner.lifecycle,
+                Lifecycle.State.STARTED
+            ).collect { user ->
+                Log.d(TAG, "$user")
+                val direction =
+                    SignUpFragmentDirections.actionSignUpFragmentToSignInFragment(user.id)
+                findNavController().navigate(direction)
+            }
         }
     }
 
@@ -156,5 +175,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         binding.glDivider.setPercentByOrientation(newConfig.orientation)
+    }
+
+    companion object {
+        private const val TAG = "SignUpFragment"
     }
 }
