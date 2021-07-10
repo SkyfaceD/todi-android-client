@@ -58,15 +58,10 @@ dependencies {
     //LeakCanary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
 
-    //Standard
-    implementation "androidx.core:core-ktx:$coreVersion"
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$refreshLayoutVersion"
-    implementation "androidx.preference:preference-ktx:$preferenceVersion"
-
     //UI
     implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$refreshLayoutVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
@@ -94,4 +89,12 @@ dependencies {
 
     //Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
+    //Datastore
+    implementation "androidx.datastore:datastore:$dataStoreVersion"
+
+    //Other
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "androidx.preference:preference-ktx:$preferenceVersion"
 }
