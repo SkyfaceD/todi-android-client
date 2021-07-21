@@ -1,4 +1,4 @@
-package org.skyfaced.todi.models.markdown
+package org.skyfaced.todi.utils.markdown
 
 /**
  * Contains additional information about selected text from EditText

@@ -7,6 +7,8 @@ interface UserRepository {
 
     suspend fun getById(id: String): User
 
+    suspend fun getByUsername(username: String): User?
+
     suspend fun getAll(): List<User>
 
     suspend fun isUsernameAvailable(username: String): Boolean

@@ -15,7 +15,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
 import org.skyfaced.todi.R
 import org.skyfaced.todi.databinding.FragmentSignInBinding
@@ -61,13 +60,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 return@setOnClickListener
             }
 
-            //FIXME
-            if (runBlocking { !viewModel.validateCredentials(username, password) }) {
+            if (!viewModel.validateCredentials(username, password)) {
                 tils.forEach { til ->
                     til.error = getString(R.string.error_incorrect_credentials)
                 }
                 return@setOnClickListener
             }
+
+            viewModel.saveIdByUsername(username)
 
             val direction = SignInFragmentDirections.actionSignInFragmentToHomeFragment()
             findNavController().navigate(direction)

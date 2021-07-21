@@ -12,8 +12,7 @@ import io.noties.markwon.editor.handler.StrongEmphasisEditHandler
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin
 import io.noties.markwon.ext.tables.TablePlugin
 import io.noties.markwon.ext.tasklist.TaskListPlugin
-import org.skyfaced.todi.models.cell.Cell
-import org.skyfaced.todi.models.markdown.Crop
+import org.skyfaced.todi.ui.custom.cell.Cell
 import org.skyfaced.todi.utils.enums.Wrapper
 import org.skyfaced.todi.utils.extensions.wrapWith
 

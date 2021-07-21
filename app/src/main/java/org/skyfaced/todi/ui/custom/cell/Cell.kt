@@ -1,6 +1,4 @@
-package org.skyfaced.todi.models.cell
-
-import org.skyfaced.todi.ui.custom.cell.CellPickerView
+package org.skyfaced.todi.ui.custom.cell
 
 data class Cell(
     val x: Int,

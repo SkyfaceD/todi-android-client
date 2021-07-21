@@ -3,6 +3,7 @@ package org.skyfaced.todi.ui.home
 import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -34,9 +35,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             setupButton()
 
             viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.userPreferencesId.flowWithLifecycle(
+                    viewLifecycleOwner.lifecycle,
+                    Lifecycle.State.CREATED
+                ).collect { id ->
+                    Log.d(TAG, "onViewCreated: id - $id")
+                }
+
                 viewModel.tasks.flowWithLifecycle(
                     viewLifecycleOwner.lifecycle,
-                    Lifecycle.State.RESUMED
+                    Lifecycle.State.CREATED
                 ).collect { tasks ->
                     adapter.submitList(tasks)
                 }

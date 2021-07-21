@@ -23,6 +23,10 @@ class UserRepositoryImpl(private val dao: UserDao) : UserRepository {
         return dao.getById(id.asUUID()).toUser()
     }
 
+    override suspend fun getByUsername(username: String): User? {
+        return dao.getByUsername(username)?.toUser()
+    }
+
     override suspend fun getAll(): List<User> {
         return dao.getAll().map(UserEntity::toUser)
     }

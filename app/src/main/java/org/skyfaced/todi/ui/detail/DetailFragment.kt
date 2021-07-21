@@ -24,11 +24,11 @@ import org.skyfaced.todi.R
 import org.skyfaced.todi.database.entities.task.TaskEntity
 import org.skyfaced.todi.databinding.DialogTableBinding
 import org.skyfaced.todi.databinding.FragmentDetailBinding
-import org.skyfaced.todi.models.cell.Cell
-import org.skyfaced.todi.models.markdown.Crop
+import org.skyfaced.todi.ui.custom.cell.Cell
 import org.skyfaced.todi.ui.custom.cell.CellPickerListener
 import org.skyfaced.todi.utils.enums.Wrapper
 import org.skyfaced.todi.utils.extensions.*
+import org.skyfaced.todi.utils.markdown.Crop
 import org.skyfaced.todi.utils.markdown.Markdown
 import java.util.*
 
@@ -221,9 +221,9 @@ class DetailFragment : Fragment(R.layout.fragment_detail), CellPickerListener {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
         _tableBinding = null
+        super.onDestroy()
     }
 
     override fun onCellChanged(cell: Cell) {

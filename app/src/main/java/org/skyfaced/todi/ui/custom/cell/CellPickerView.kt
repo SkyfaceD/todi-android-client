@@ -9,7 +9,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import org.skyfaced.todi.models.cell.Cell
 import org.skyfaced.todi.utils.extensions.lazySafetyNone
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -21,7 +20,9 @@ class CellPickerView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
     private val isDebug: Boolean = false
 ) : View(context, attrs, defStyleAttr) {
-    private lateinit var canvas: Canvas
+    private var _canvas: Canvas? = null
+    private val canvas = checkNotNull(_canvas) { "Canvas is null" }
+
     private val paint = Paint()
     private val textPaint = Paint()
     private val backgroundPaint = Paint()
@@ -32,8 +33,8 @@ class CellPickerView @JvmOverloads constructor(
     private var cell: Cell? = null
         set(value) {
             field = value
-            cellPickerListener?.onCellChanged(value ?: cells[0])
             changeCellColor()
+            cellPickerListener?.onCellChanged(value ?: cells[0])
         }
 
     val currentCell get() = checkNotNull(cell) { "Cell is null, magic" }
@@ -83,7 +84,7 @@ class CellPickerView @JvmOverloads constructor(
 
     override fun onDraw(c: Canvas) {
         super.onDraw(c)
-        canvas = c
+        _canvas = c
 
         canvas.save()
         if (isDebug) {

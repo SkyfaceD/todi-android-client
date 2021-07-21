@@ -4,23 +4,33 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.skyfaced.todi.datastore.user.UserPreferencesRepository
 import org.skyfaced.todi.models.user.User
 import org.skyfaced.todi.repositories.user.UserRepository
 
-class SignInViewModel(private val repository: UserRepository) : ViewModel() {
+class SignInViewModel(
+    private val userRepository: UserRepository,
+    private val userPreferencesRepository: UserPreferencesRepository
+) : ViewModel() {
     private val _user = MutableSharedFlow<User>()
     val user = _user.asSharedFlow()
 
     fun findUserById(id: String) {
         viewModelScope.launch {
-            _user.emit(repository.getById(id))
+            _user.emit(userRepository.getById(id))
         }
     }
 
-    suspend fun validateCredentials(username: String, password: String): Boolean {
-        return flow<Boolean> { repository.checkCredentials(username, password) }.first()
+    fun validateCredentials(username: String, password: String) = runBlocking {
+        userRepository.checkCredentials(username, password)
+    }
+
+    fun saveIdByUsername(username: String) {
+        viewModelScope.launch {
+            val id = userRepository.getByUsername(username)?.id ?: ""
+            userPreferencesRepository.saveId(id)
+        }
     }
 }

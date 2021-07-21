@@ -10,9 +10,9 @@ import org.skyfaced.todi.ui.signUp.SignUpViewModel
 val viewModelModule = module {
     viewModel { SignUpViewModel(get()) }
 
-    viewModel { SignInViewModel(get()) }
+    viewModel { SignInViewModel(get(), get()) }
 
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(), get()) }
 
     viewModel { DetailViewModel(get()) }
 }

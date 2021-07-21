@@ -2,8 +2,7 @@ package org.skyfaced.todi.utils.markdown
 
 import android.widget.TextView
 import io.noties.markwon.editor.MarkwonEditor
-import org.skyfaced.todi.models.cell.Cell
-import org.skyfaced.todi.models.markdown.Crop
+import org.skyfaced.todi.ui.custom.cell.Cell
 import org.skyfaced.todi.utils.enums.Wrapper
 
 interface Markdown {

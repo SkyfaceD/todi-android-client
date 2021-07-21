@@ -35,7 +35,7 @@
             android:id="@+id/edt_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:imeOptions="actionSend"
+            android:imeOptions="actionGo"
             android:inputType="text"
             android:maxLength="16"
             android:maxLines="1" />
@@ -107,6 +107,7 @@
             android:id="@+id/edt_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:imeOptions="actionGo"
             android:inputType="textPassword"
             android:maxLength="32"
             android:maxLines="1" />

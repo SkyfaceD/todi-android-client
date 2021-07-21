@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.protobuf'
 }
 
 android {
@@ -52,6 +53,33 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    sourceSets {
+        main {
+            proto {
+                srcDir 'src/main/proto'
+            }
+            java {
+                srcDirs 'build/generated/source/proto/main/java'
+            }
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
+    }
+
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option "lite"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -91,6 +119,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
 
     //Datastore
+    implementation "com.google.protobuf:protobuf-javalite:$protobufVersion"
     implementation "androidx.datastore:datastore:$dataStoreVersion"
 
     //Other

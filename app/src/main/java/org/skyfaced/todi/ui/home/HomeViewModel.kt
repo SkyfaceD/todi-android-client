@@ -2,14 +2,17 @@ package org.skyfaced.todi.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import org.skyfaced.todi.datastore.UserPreferences
+import org.skyfaced.todi.datastore.user.UserPreferencesRepository
 import org.skyfaced.todi.models.task.Task
 import org.skyfaced.todi.repositories.task.TaskRepository
 
-class HomeViewModel(private val repository: TaskRepository) : ViewModel() {
+class HomeViewModel(
+    private val taskRepository: TaskRepository,
+    userPreferencesRepository: UserPreferencesRepository
+) : ViewModel() {
     var firstVisibleItemPosition: Int = 0
 
     private val _tasks: MutableStateFlow<List<Task>> = MutableStateFlow(emptyList())
@@ -21,7 +24,10 @@ class HomeViewModel(private val repository: TaskRepository) : ViewModel() {
 
     fun fetchTasks() {
         viewModelScope.launch {
-            _tasks.emit(repository.getAll())
+            _tasks.emit(taskRepository.getAll())
         }
     }
+
+    val userPreferencesId: Flow<String> =
+        userPreferencesRepository.userPreferencesFlow.map(UserPreferences::getId)
 }
