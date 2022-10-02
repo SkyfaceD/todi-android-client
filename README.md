@@ -1,1 +1,1 @@
-### Abondoned. See new version [click](https://github.com/SkyfaceD/todi).
+### Abondoned. See new version [here](https://github.com/SkyfaceD/todi).
